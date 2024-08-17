@@ -16,12 +16,25 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
+
+
+// Allow specific origins
+const allowedOrigins = ['https://hire-me-app-beta.vercel.app'];
+
 const corsOptions = {
-    origin:'https://hire-me-4y6sfoadq-akankshas-projects-22a532f1.vercel.app',
-    credentials:true
-}
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
 app.use(cors(corsOptions));
+
+
+
 
 const PORT = process.env.PORT || 3000;
 
