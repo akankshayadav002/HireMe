@@ -19,19 +19,13 @@ app.use(cookieParser());
 
 
 // Allow specific origins
-const allowedOrigins = ['https://hire-me-app-beta.vercel.app'];
+app.use(cors({
+    origin: 'https://hire-me-axwy7tfyz-akankshas-projects-22a532f1.vercel.app', // Allow your frontend's origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+    credentials: true // If your requests include credentials (e.g., cookies)
+  }));
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
 
-app.use(cors(corsOptions));
 
 
 
